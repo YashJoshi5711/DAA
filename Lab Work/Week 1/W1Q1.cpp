@@ -1,28 +1,40 @@
- //Linear Search
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
-int main()
-{
+
+void findComparison(int arr[],int n,int target){
+    int comp=0,i=0;
+    while(i!=n){
+        comp+=1;
+        if(arr[i]==target)
+        {
+            break;
+        }
+        i+=1;
+    }
+    if(i==n)
+    {
+        cout<<"Not Present "<<comp<<endl;
+        return ;
+    }
+    cout<<"Present "<<comp<<endl;
+}
+
+int main(){
     int t;
     cin>>t;
     while(t--)
     {
         int n;
         cin>>n;
-        vector<int> arr(n);
-        for(int &i:arr)
-            cin>>i;
-        int key,i;
-        cin>>key;
-        for(i=0;i<n;i++)
+        int arr[n];
+        for(int i=0;i<=n-1;i++)
         {
-            if(arr[i]==key)
-                break;
+            cin>>arr[i];
         }
-        if(i==n)
-            cout<<"Not Present "<<n<<endl;
-        else
-            cout<<"Present "<<i+1<<endl;
+        int target;
+        cin>>target;
+        findComparison(arr,n,target);
+
     }
     return 0;
 }
