@@ -1,48 +1,44 @@
- // jump search
 #include<bits/stdc++.h>
+
 using namespace std;
 
-int jumpSearch(int *a, int n, int key){
-    int i=0,j=2;
-    int comp=0;
-    while(comp++ && a[j]<=key && j<n){
-        if(a[j]==key){
-            cout << "Present ";
-            return j;
-        }
-        i=j;
-        j*=2;
-        if(j>=n){
-            j=n-1;
-        }
+bool jumpSearch(int a[], int n, int key, int &cnt) {
+    int l = 0;
+    int m = sqrt(n) - 1;
+	
+    while(m < n && a[m] <= key) {
+        cnt++;
+		if(a[m] == key) {
+			return true;
+		}
+        l = m;
+        m += sqrt(n);
     }
-
-    for(int k=i; k<=j; k++,comp++){
-        if(a[k]==key){
-            cout << "Present ";
-            return j;
-        }  
-    }
-    cout << "Not Present ";
-    return comp;
+	for (int i = l + 1; i < min(m, n); ++i) {
+        cnt++;
+		if(a[i] == key) {
+			return true;
+		}
+	}
+	return false;
 }
-int main(){
-    int t;
-    cin >> t;
 
-    while(t--){
-        int n;
-        cin >> n;
-
-        int *a=new int[n];
-        for(int i=0;i<n;i++){
-            cin >> a[i];
-        }
-
-        int key;
-        cin >> key;
-
-        cout << jumpSearch(a,n,key) << endl;
-    }
-    return 0;
+int main() {
+	int t;
+	cin >> t;
+	while(t--) {
+		int n, k; 
+		cin >> n;
+		int* a = new int[n];
+		for (int i = 0; i < n; ++i)
+			cin >> a[i];
+		cin >> k;
+        int cnt = 0;
+		bool ispresent = jumpSearch(a, n, k, cnt);
+		if(ispresent)
+			cout << "Present " << cnt << endl;
+		else
+			cout << "Not Present " << cnt << endl;
+	}
+	return 0;
 }
