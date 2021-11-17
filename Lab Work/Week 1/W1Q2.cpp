@@ -1,41 +1,49 @@
- // Binary Search
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
-void binary_search(vector<int> &arr,int n,int key)
-{
-    int l=0,r=n-1,comp=0;
-    while(l<=r)
+
+void findComparison(int arr[],int n,int target){
+    int comp=0,s=0,e=n-1,mid;
+    while(s<=e)
     {
-        int mid=l+(r-l)/2;
-        if(key==arr[mid])
+        comp+=1;
+        mid= s+(e-s)/2;
+        if(arr[mid]==target)
         {
-            break;
+            cout<<"Present "<<comp<<endl;
+            return;
         }
-        else if(key<arr[mid])
-            r=mid-1;
-        else
-            l=mid+1;
-        comp++;
+        if(arr[mid]<target)
+        {
+            s=mid+1;
+        }
+        else{
+            e=mid-1;
+        }
     }
-    if(l>r)
-        cout<<"Not Present "<<comp<<endl;
-    else
-        cout<<"Present "<<comp+1<<endl;
+    if(arr[s]==target)
+    {
+        cout<<"Present "<<comp<<endl;
+        return;
+    }
+    cout<<"Not Present "<<comp<<endl;
 }
-int main()
-{
+
+int main(){
     int t;
     cin>>t;
     while(t--)
     {
         int n;
         cin>>n;
-        vector<int> arr(n);
-        for(int &i:arr)
-            cin>>i;
-        int key;
-        cin>>key;
-        binary_search(arr,n,key);
+        int arr[n];
+        for(int i=0;i<=n-1;i++)
+        {
+            cin>>arr[i];
+        }
+        int target;
+        cin>>target;
+        findComparison(arr,n,target);
+
     }
     return 0;
 }
